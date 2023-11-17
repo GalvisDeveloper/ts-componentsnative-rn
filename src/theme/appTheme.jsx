@@ -15,6 +15,7 @@ export const colors = {
 export const styles = StyleSheet.create({
 	globalMargin: {
 		marginTop: 20,
+		marginHorizontal: 10,
 	},
 	background: {
 		flex: 1,
@@ -28,7 +29,6 @@ export const styles = StyleSheet.create({
 		fontSize: 30,
 		marginBottom: 10,
 		fontWeight: 'bold',
-		marginLeft: 10,
 	},
 	bigBtn: {
 		width: 100,
