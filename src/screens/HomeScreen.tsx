@@ -3,45 +3,59 @@ import { Text, View } from 'react-native';
 import { styles } from '../theme/appTheme';
 
 import { FlatList } from 'react-native-gesture-handler';
-
-interface MenuItem {
-	name: string;
-	icon: string;
-	components: string;
-}
+import FlatListMenuItem from '../components/FlatList/FlatListMenuItem';
 
 const DATA = [
 	{
 		name: 'Animation 101',
 		icon: 'cube-outline',
-		components: 'Animation101Screen',
+		component: 'Animation01Screen',
 	},
 	{
 		name: 'Animation 102',
-		icon: 'cube-outline',
-		components: 'Animation102Screen',
+		icon: 'bar-chart-outline',
+		component: 'Animation02Screen',
 	},
 	{
 		name: 'Animation 103',
-		icon: 'cube-outline',
-		components: 'Animation103Screen',
+		icon: 'cloud-circle-outline',
+		component: 'Animation03Screen',
 	},
 ];
 
 const HomeScreen = () => {
-	const renderMenuItem = (menuItem: MenuItem) => {
+	const renderListHeader = () => {
 		return (
 			<View>
-				<Text>
-					{menuItem.name} - {menuItem.icon}
-				</Text>
+				<Text style={styles.title}>Menu Options</Text>
 			</View>
+		);
+	};
+
+	const renderItemSeparator = () => {
+		return (
+			<View
+				style={{
+					display: 'flex',
+					width: '90%',
+					alignSelf: 'center',
+					borderBottomWidth: 1,
+					opacity: 0.3,
+					marginVertical: 8,
+				}}
+			/>
 		);
 	};
 
 	return (
 		<View style={styles.globalMargin}>
-			<FlatList data={DATA} renderItem={({ item }) => renderMenuItem(item)} keyExtractor={(item) => item.components} />
+			<FlatList
+				ListHeaderComponent={renderListHeader}
+				data={DATA}
+				renderItem={({ item }) => <FlatListMenuItem menuItem={item} />}
+				keyExtractor={(item) => item.component}
+				ItemSeparatorComponent={renderItemSeparator}
+			/>
 		</View>
 	);
 };
