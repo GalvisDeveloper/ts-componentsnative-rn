@@ -1,17 +1,27 @@
 import React from 'react';
-import { Animated, Button, StyleSheet, Text, View } from 'react-native';
+import { Animated, Button, StyleSheet, View } from 'react-native';
 import useFadeAnimation from '../../hooks/useFadeAnimation';
 import { colors } from '../../theme/appTheme';
 
 const Animation02Screen = () => {
-	const { opacity, fadeIn, fadeOut } = useFadeAnimation({ initialOpacity: 0.5, timer: 300 });
+	const { fadeIn, fadeOut, startMovingAnimation, panResponder, pan } = useFadeAnimation({
+		initialOpacity: 0,
+		timer: 500,
+		initialPosition: -100,
+	});
 
 	return (
-		<View style={localStyles.ct}>
-			<Animated.View style={{ ...localStyles.purpleBox, opacity }} />
+		<View style={localStyles.container}>
+			<Animated.View {...panResponder.panHandlers} style={[pan.getLayout(), localStyles.box]} />
 
 			<View style={{ marginTop: 20, gap: 10, flexDirection: 'row' }}>
-				<Button title='Fade In' onPress={() => fadeIn()} />
+				<Button
+					title='Fade In'
+					onPress={() => {
+						fadeIn();
+						startMovingAnimation();
+					}}
+				/>
 				<Button title='Fade Out' onPress={fadeOut} />
 			</View>
 		</View>
@@ -21,7 +31,7 @@ const Animation02Screen = () => {
 export default Animation02Screen;
 
 const localStyles = StyleSheet.create({
-	ct: {
+	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -30,5 +40,11 @@ const localStyles = StyleSheet.create({
 		backgroundColor: colors.secondary,
 		width: 150,
 		height: 150,
+	},
+	box: {
+		backgroundColor: '#61dafb',
+		width: 80,
+		height: 80,
+		borderRadius: 4,
 	},
 });

@@ -4,14 +4,34 @@ import useFadeAnimation from '../../hooks/useFadeAnimation';
 import { colors } from '../../theme/appTheme';
 
 const Animation01Screen = () => {
-	const { opacity, fadeIn, fadeOut } = useFadeAnimation({ initialOpacity: 0.5, timer: 300 });
+	const { opacity, fadeIn, fadeOut, position, startMovingAnimation } = useFadeAnimation({
+		initialOpacity: 0,
+		timer: 500,
+		initialPosition: -100,
+	});
 
 	return (
-		<View style={localStyles.ct}>
-			<Animated.View style={{ ...localStyles.purpleBox, opacity }} />
+		<View style={localStyles.container}>
+			<Animated.View
+				style={{
+					...localStyles.purpleBox,
+					opacity,
+					transform: [
+						{
+							translateX: position,
+						},
+					],
+				}}
+			/>
 
 			<View style={{ marginTop: 20, gap: 10, flexDirection: 'row' }}>
-				<Button title='Fade In' onPress={() => fadeIn()} />
+				<Button
+					title='Fade In'
+					onPress={() => {
+						fadeIn();
+						startMovingAnimation();
+					}}
+				/>
 				<Button title='Fade Out' onPress={fadeOut} />
 			</View>
 		</View>
@@ -21,7 +41,7 @@ const Animation01Screen = () => {
 export default Animation01Screen;
 
 const localStyles = StyleSheet.create({
-	ct: {
+	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
