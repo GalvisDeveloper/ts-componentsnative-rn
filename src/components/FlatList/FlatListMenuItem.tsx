@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../theme/appTheme';
 
 interface Props {
 	menuItem: MenuItem;
@@ -16,12 +17,12 @@ const FlatListMenuItem = ({ menuItem }: Props) => {
 		<TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate(menuItem.component as never)}>
 			<View style={localStyles.container}>
 				<View style={localStyles.iconPlusName}>
-					<Icon name={menuItem.icon} color='gray' size={23} />
+					<Icon name={menuItem.icon} color={colors.primary} size={23} />
 					<Text style={localStyles.itemText}>{menuItem.name} </Text>
 				</View>
 
 				<View>
-					<Icon name='caret-forward-outline' color='gray' size={23} />
+					<Icon name='caret-forward-outline' color={colors.primary} size={23} />
 				</View>
 			</View>
 		</TouchableOpacity>
