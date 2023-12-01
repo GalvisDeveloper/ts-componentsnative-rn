@@ -1,63 +1,59 @@
-import React, { useState } from 'react';
-import { colors, styles } from '../theme/appTheme';
-import { TextInput, View, StyleSheet, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import React from 'react';
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import CustomSwitch from '../components/CustomSwitch';
 import HeaderTitle from '../components/HeaderTitle';
+import useForm from '../hooks/useForm';
+import { colors, styles } from '../theme/appTheme';
+import { Text } from 'react-native';
 
 const TextInputScreen = () => {
-	const [form, setForm] = useState({
+	const { fields, onChange, name, email, phone, isSubscribed } = useForm({
 		name: '',
 		email: '',
 		phone: '',
+		isSubscribed: false,
 	});
-
-	const onChange = (text: string, field: string) => {
-		setForm({
-			...form,
-			[field]: text,
-		});
-	};
 
 	return (
 		<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
 			<ScrollView>
-				<View style={styles.globalMargin}>
-					<HeaderTitle title='Text Inputs' color={colors.primary} />
-					<TextInput
-						style={localStyles.inputStyle}
-						placeholder='Type your name'
-						value={form.name}
-						autoCorrect={true}
-						onChangeText={(value) => onChange(value, 'name')}
-						autoCapitalize='words'
-						// onChangeText={(value) => onChange(value, 'name')}
-					/>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+					<View style={styles.globalMargin}>
+						<HeaderTitle title='Text Inputs' color={colors.primary} />
+						<TextInput
+							style={localStyles.inputStyle}
+							placeholder='Type your name'
+							value={name}
+							autoCorrect={true}
+							onChangeText={(value) => onChange(value, 'name')}
+							autoCapitalize='words'
+						/>
 
-					<TextInput
-						style={localStyles.inputStyle}
-						placeholder='Type your email'
-						value={form.email}
-						onChangeText={(value) => onChange(value, 'email')}
-						keyboardType='email-address'
-						keyboardAppearance='dark' // * iOS only
-						// autoCorrect={false}
-						autoCapitalize='none'
-						// onChangeText={(value) => onChange(value, 'name')}
-					/>
+						<TextInput
+							style={localStyles.inputStyle}
+							placeholder='Type your email'
+							value={email}
+							onChangeText={(value) => onChange(value, 'email')}
+							keyboardType='email-address'
+							keyboardAppearance='dark' // * iOS only
+							autoCapitalize='none'
+						/>
 
-					<HeaderTitle title={JSON.stringify(form, null, 3)} color={colors.primary} />
-					<HeaderTitle title={JSON.stringify(form, null, 3)} color={colors.primary} />
-					<TextInput
-						style={localStyles.inputStyle}
-						placeholder='Type your phone'
-						value={form.phone}
-						onChangeText={(value) => onChange(value, 'phone')}
-						keyboardType='phone-pad'
-						// autoCorrect={false}
-						// autoCapitalize='words'
-						// onChangeText={(value) => onChange(value, 'name')}
-					/>
-					{/* <Text> {JSON.stringify(form, null, 3)} </Text> */}
-				</View>
+						<View style={localStyles.subscribeContainer}>
+							<Text style={styles.text}>Is subscribed?: </Text>
+							<CustomSwitch isOn={isSubscribed} onChange={(bool) => onChange(bool, 'isSubscribed')} />
+						</View>
+
+						<TextInput
+							style={localStyles.inputStyle}
+							placeholder='Type your phone'
+							value={phone}
+							onChangeText={(value) => onChange(value, 'phone')}
+							keyboardType='phone-pad'
+						/>
+						<HeaderTitle title={JSON.stringify(fields, null, 3)} color={colors.primary} />
+					</View>
+				</TouchableWithoutFeedback>
 			</ScrollView>
 		</KeyboardAvoidingView>
 	);
@@ -73,5 +69,10 @@ const localStyles = StyleSheet.create({
 		borderRadius: 10,
 		marginVertical: 10,
 		borderColor: colors.primary,
+	},
+	subscribeContainer: {
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
 	},
 });
