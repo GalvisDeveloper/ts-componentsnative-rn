@@ -5,12 +5,13 @@ import { styles } from '../theme/appTheme';
 interface Props {
 	title: string;
 	color?: string;
+	size?: number;
 }
 
-const HeaderTitle = ({ title, color }: Props) => {
+const HeaderTitle = ({ title, color, size = 30 }: Props) => {
 	return (
 		<View style={{ marginTop: 20 }}>
-			<Text style={{ ...styles.title, color }}>{title}</Text>
+			<Text style={{ ...styles.title, color, fontSize: size }}>{title}</Text>
 		</View>
 	);
 };
