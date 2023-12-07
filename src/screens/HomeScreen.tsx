@@ -6,23 +6,9 @@ import { FlatList } from 'react-native-gesture-handler';
 import FlatListMenuItem from '../components/FlatList/FlatListMenuItem';
 import { menuItems } from '../data/menuItems';
 import HeaderTitle from '../components/HeaderTitle';
+import ItemSeparator from '../components/ItemSeparator';
 
 const HomeScreen = () => {
-	const renderItemSeparator = () => {
-		return (
-			<View
-				style={{
-					display: 'flex',
-					width: '90%',
-					alignSelf: 'center',
-					borderBottomWidth: 1,
-					opacity: 0.3,
-					marginVertical: 8,
-				}}
-			/>
-		);
-	};
-
 	return (
 		<View style={styles.globalMargin}>
 			<FlatList
@@ -30,7 +16,7 @@ const HomeScreen = () => {
 				data={menuItems}
 				renderItem={({ item }) => <FlatListMenuItem menuItem={item} />}
 				keyExtractor={(item) => item.component}
-				ItemSeparatorComponent={renderItemSeparator}
+				ItemSeparatorComponent={ItemSeparator}
 			/>
 		</View>
 	);
