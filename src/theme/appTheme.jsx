@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
 	globalMargin: {
 		marginTop: 20,
 		marginHorizontal: 10,
+		flex: 1,
 	},
 	background: {
 		flex: 1,

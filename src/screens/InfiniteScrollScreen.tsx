@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
 import { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { colors } from '../theme/appTheme';
+import { colors, styles } from '../theme/appTheme';
 import FadeInImage from '../components/FadeInImage';
 
 const InfiniteScrollScreen = () => {
@@ -24,16 +24,21 @@ const InfiniteScrollScreen = () => {
 	};
 
 	const renderItem = (item: number) => {
-		return <FadeInImage uri={`https://picsum.photos/id/${item}/500/400`} style={{ width: '100%', borderRadius: 30 }} />;
+		return (
+			<FadeInImage
+				uri={`https://picsum.photos/id/${item}/500/400`}
+				style={{ width: '100%', borderRadius: 30, marginBottom: 5 }}
+			/>
+		);
 	};
 
 	return (
-		<View style={{ flex: 1, backgroundColor: 'red' }}>
+		<View style={{ ...styles.globalMargin }}>
 			<FlatList
 				data={numbers}
 				renderItem={({ item }) => renderItem(item)}
 				keyExtractor={(item) => item.toString()}
-				ListHeaderComponent={<HeaderTitle title='Infinite Scroll' />}
+				ListHeaderComponent={<HeaderTitle title='Infinite Scroll' color={colors.primary} />}
 				ListFooterComponent={() => (
 					<View style={{ height: 150, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
 						<ActivityIndicator size={25} color={colors.primary} />
