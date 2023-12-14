@@ -24,7 +24,7 @@ const InfiniteScrollScreen = () => {
 	};
 
 	const renderItem = (item: number) => {
-		return <FadeInImage uri={`https://picsum.photos/id/${item}/500/400`} />;
+		return <FadeInImage uri={`https://picsum.photos/id/${item}/500/400`} style={{ width: '100%', borderRadius: 30 }} />;
 	};
 
 	return (
