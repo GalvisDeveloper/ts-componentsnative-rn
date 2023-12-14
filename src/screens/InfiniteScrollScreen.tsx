@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
 import { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
+import { colors } from '../theme/appTheme';
+import FadeInImage from '../components/FadeInImage';
 
 const InfiniteScrollScreen = () => {
 	const [numbers, setNumbers] = useState([0, 1, 2, 3, 4, 5]);
@@ -16,11 +18,13 @@ const InfiniteScrollScreen = () => {
 		// setNumbers([...numbers, ...newArray]);
 
 		// shortest way
-		setNumbers((prevNumbers) => [...prevNumbers, ...Array.from({ length: 5 }, (_, index) => prevNumbers.length + index)]);
+		setTimeout(() => {
+			setNumbers((prevNumbers) => [...prevNumbers, ...Array.from({ length: 5 }, (_, index) => prevNumbers.length + index)]);
+		}, 300);
 	};
 
 	const renderItem = (item: number) => {
-		return <Text style={localStyles.textItem}>{item}</Text>;
+		return <FadeInImage uri={`https://picsum.photos/id/${item}/500/400`} />;
 	};
 
 	return (
@@ -30,6 +34,11 @@ const InfiniteScrollScreen = () => {
 				renderItem={({ item }) => renderItem(item)}
 				keyExtractor={(item) => item.toString()}
 				ListHeaderComponent={<HeaderTitle title='Infinite Scroll' />}
+				ListFooterComponent={() => (
+					<View style={{ height: 150, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+						<ActivityIndicator size={25} color={colors.primary} />
+					</View>
+				)}
 				onEndReached={loadMore}
 				onEndReachedThreshold={0.1}
 			/>
