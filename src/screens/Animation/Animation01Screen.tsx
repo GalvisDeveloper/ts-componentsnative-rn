@@ -4,11 +4,7 @@ import useFadeAnimation from '../../hooks/useFadeAnimation';
 import { colors } from '../../theme/appTheme';
 
 const Animation01Screen = () => {
-	const { opacity, fadeIn, fadeOut, position, startMovingAnimation } = useFadeAnimation({
-		initialOpacity: 0,
-		timer: 500,
-		initialPosition: -100,
-	});
+	const { opacity, fadeIn, fadeOut, position, startMovingAnimation } = useFadeAnimation();
 
 	return (
 		<View style={localStyles.container}>

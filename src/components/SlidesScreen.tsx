@@ -39,9 +39,7 @@ const SlidesScreen = () => {
 
 	const navigation = useNavigation();
 
-	const { fadeIn, opacity, fadeOut } = useFadeAnimation({ initialOpacity: 0.5, timer: 500 });
-
-	console.log(opacity);
+	const { fadeIn, opacity, fadeOut } = useFadeAnimation({ timer: 500 });
 
 	useEffect(() => {
 		if (activeIndex === items.length - 1) fadeIn();
@@ -99,26 +97,24 @@ const SlidesScreen = () => {
 					}}
 				/>
 
-				{activeIndex === items.length - 1 && (
-					<Animated.View style={{ opacity }}>
-						<TouchableOpacity
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'center',
-								alignItems: 'center',
-								height: 50,
-								width: 150,
-								borderRadius: 10,
-								backgroundColor: colors.primary,
-							}}
-							activeOpacity={0.8}
-							onPress={() => navigation.goBack()}
-						>
-							<Text style={{ fontSize: 25, color: 'white' }}>Join</Text>
-							<Icon name='arrow-forward-outline' size={30} color='white' />
-						</TouchableOpacity>
-					</Animated.View>
-				)}
+				<Animated.View style={{ opacity }}>
+					<TouchableOpacity
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							height: 50,
+							width: 150,
+							borderRadius: 10,
+							backgroundColor: colors.primary,
+						}}
+						activeOpacity={0.8}
+						onPress={() => navigation.goBack()}
+					>
+						<Text style={{ fontSize: 25, color: 'white' }}>Join</Text>
+						<Icon name='arrow-forward-outline' size={30} color='white' />
+					</TouchableOpacity>
+				</Animated.View>
 			</View>
 		</SafeAreaView>
 	);

@@ -7,7 +7,7 @@ interface Props {
 	timer?: number;
 }
 
-const useFadeAnimation = ({ initialOpacity = 0, timer, initialPosition = 0 }: Props) => {
+const useFadeAnimation = ({ initialOpacity = 0, timer = 500, initialPosition = -100 }: Props = {}) => {
 	const opacity = useRef(new Animated.Value(initialOpacity)).current;
 	const position = useRef(new Animated.Value(initialPosition)).current;
 
