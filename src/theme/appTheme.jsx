@@ -22,11 +22,11 @@ export const styles = StyleSheet.create({
 		flex: 1,
 	},
 	text: {
-		color: 'black',
+		// color: 'black',
 		fontSize: 20,
 	},
 	title: {
-		color: 'black',
+		// color: 'black',
 		fontSize: 30,
 		marginBottom: 10,
 		fontWeight: 'bold',
@@ -65,11 +65,11 @@ export const styles = StyleSheet.create({
 	},
 	bigIcon: {
 		fontSize: 90,
-		color: colors.blue,
+		// color: colors.blue,
 	},
 	icon: {
 		fontSize: 20,
-		color: colors.blue,
+		// color: colors.blue,
 	},
 	carouselCt: {
 		height: 440,

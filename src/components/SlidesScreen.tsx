@@ -33,7 +33,7 @@ const items: Slide[] = [
 ];
 
 const SlidesScreen = () => {
-	const { width: screenX, height: screenY } = useWindowDimensions();
+	const { width: screenX } = useWindowDimensions();
 
 	const [activeIndex, setActiveIndex] = useState(0);
 

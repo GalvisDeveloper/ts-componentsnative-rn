@@ -48,7 +48,12 @@ export const menuItems: MenuItem[] = [
 	},
 	{
 		name: 'SlidesScreen',
-		icon: 'color-palette-outline',
+		icon: 'arrow-forward-outline',
 		component: 'SlidesScreen',
+	},
+	{
+		name: 'ChangeThemeScreen',
+		icon: 'color-palette-outline',
+		component: 'ChangeThemeScreen',
 	},
 ];
