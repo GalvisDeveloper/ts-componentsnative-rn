@@ -1,5 +1,5 @@
+import { Theme } from '@react-navigation/native';
 import { createSlice } from '@reduxjs/toolkit';
-import { DarkTheme, Theme, DefaultTheme } from '@react-navigation/native';
 
 interface ThemeState extends Theme {
 	currentTheme: 'light' | 'dark';
@@ -15,10 +15,9 @@ let initialState: State = {
 		currentTheme: 'light',
 		dark: false,
 		colors: {
-			// ...DefaultTheme.colors,
 			primary: '#5856D6',
 			background: 'white',
-			text: 'white',
+			text: 'black',
 			border: '#5856D6',
 			card: 'white',
 			notification: 'teal',
@@ -35,8 +34,11 @@ export const themeSlice = createSlice({
 				...state.theme,
 				...action.payload,
 			}
+		},
+		resetThemeDefault: (state) => {
+			Object.assign(state.theme, initialState.theme);
 		}
 	},
 });
 
-export const { setTheme } = themeSlice.actions;
+export const { setTheme, resetThemeDefault } = themeSlice.actions;

@@ -12,7 +12,7 @@ const HomeScreen = () => {
 	return (
 		<View style={styles.globalMargin}>
 			<FlatList
-				ListHeaderComponent={() => <HeaderTitle title='Menu Options' color={colors.primary} />}
+				ListHeaderComponent={() => <HeaderTitle title='Menu Options' />}
 				data={menuItems}
 				renderItem={({ item }) => <FlatListMenuItem menuItem={item} />}
 				keyExtractor={(item) => item.component}

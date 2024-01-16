@@ -38,7 +38,7 @@ const InfiniteScrollScreen = () => {
 				data={numbers}
 				renderItem={({ item }) => renderItem(item)}
 				keyExtractor={(item) => item.toString()}
-				ListHeaderComponent={<HeaderTitle title='Infinite Scroll' color={colors.primary} />}
+				ListHeaderComponent={<HeaderTitle title='Infinite Scroll' />}
 				ListFooterComponent={() => (
 					<View style={{ height: 150, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
 						<ActivityIndicator size={25} color={colors.primary} />

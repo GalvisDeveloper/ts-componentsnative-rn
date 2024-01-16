@@ -7,6 +7,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import useFadeAnimation from '../hooks/useFadeAnimation';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 interface Slide {
 	title: string;
@@ -41,6 +43,8 @@ const SlidesScreen = () => {
 
 	const { fadeIn, opacity, fadeOut } = useFadeAnimation({ timer: 500 });
 
+	const { theme } = useSelector((state: RootState) => state.theme);
+
 	useEffect(() => {
 		if (activeIndex === items.length - 1) fadeIn();
 
@@ -58,8 +62,8 @@ const SlidesScreen = () => {
 				}}
 			>
 				<Image source={item.img} style={{ width: 350, height: 400, resizeMode: 'center' }} />
-				<Text style={{ ...styles.title, color: colors.primary }}>{item.title}</Text>
-				<Text style={styles.text}>{item.desc}</Text>
+				<Text style={{ ...styles.title, color: theme.colors.primary }}>{item.title}</Text>
+				<Text style={{ ...styles.text, color: theme.colors.primary }}>{item.desc}</Text>
 			</View>
 		);
 	};
@@ -111,8 +115,8 @@ const SlidesScreen = () => {
 						activeOpacity={0.8}
 						onPress={() => navigation.goBack()}
 					>
-						<Text style={{ fontSize: 25, color: 'white' }}>Join</Text>
-						<Icon name='arrow-forward-outline' size={30} color='white' />
+						<Text style={{ fontSize: 25, color: theme.colors.primary }}>Join</Text>
+						<Icon name='arrow-forward-outline' size={30} color={colors.primary} />
 					</TouchableOpacity>
 				</Animated.View>
 			</View>

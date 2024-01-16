@@ -5,6 +5,7 @@ import { colors, styles } from '../theme/appTheme';
 import { RefreshControl } from 'react-native-gesture-handler';
 import { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from '@react-navigation/native';
 
 const PullToRefresh = () => {
 	const { top } = useSafeAreaInsets();
@@ -12,6 +13,8 @@ const PullToRefresh = () => {
 	const [refreshing, setRefreshing] = useState(false);
 
 	const [data, setData] = useState<string>('');
+
+	const { colors: themeColor } = useTheme();
 
 	const onRefresh = () => {
 		setRefreshing(true);
@@ -42,9 +45,9 @@ const PullToRefresh = () => {
 			}
 		>
 			<View style={styles.globalMargin}>
-				<HeaderTitle title='Pull To Refresh' color={colors.primary} />
+				<HeaderTitle title='Pull To Refresh' />
 
-				{data && <Text>{data}</Text>}
+				{data && <Text style={{ color: themeColor.text }}>{data}</Text>}
 			</View>
 		</ScrollView>
 	);

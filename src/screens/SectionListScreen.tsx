@@ -4,6 +4,7 @@ import { colors, styles } from '../theme/appTheme';
 import HeaderTitle from '../components/HeaderTitle';
 import { SectionList } from 'react-native';
 import ItemSeparator from '../components/ItemSeparator';
+import { useTheme } from '@react-navigation/native';
 
 interface Houses {
 	house: string;
@@ -84,25 +85,27 @@ const houses: Houses[] = [
 ];
 
 const SectionListScreen = () => {
+	const { colors: themeColor } = useTheme();
+
 	return (
 		<View style={{ ...styles.globalMargin, flex: 1 }}>
 			<SectionList
 				sections={houses}
-				ListHeaderComponent={() => <HeaderTitle title='Section List' color={colors.primary} />}
+				ListHeaderComponent={() => <HeaderTitle title='Section List' />}
 				ListFooterComponent={() => (
 					<View style={{ marginBottom: 70 }}>
-						<HeaderTitle title={'House`s number: ' + houses.length} color={colors.primary} />
+						<HeaderTitle title={'House`s number: ' + houses.length} />
 					</View>
 				)}
 				keyExtractor={(item, index) => item + index}
-				renderItem={({ item }) => <Text style={styles.text}>{item}</Text>}
+				renderItem={({ item }) => <Text style={{ ...styles.text, color: themeColor.text }}>{item}</Text>}
 				renderSectionHeader={({ section }) => (
 					<View style={{ backgroundColor: colors.white }}>
-						<HeaderTitle title={section.house} size={20} color={colors.tertiary} />
+						<HeaderTitle title={section.house} size={20} color={colors.primary} />
 					</View>
 				)}
 				renderSectionFooter={({ section }) => (
-					<HeaderTitle title={'Total: ' + section.data.length} size={18} color={colors.secondary} />
+					<HeaderTitle title={'Total: ' + section.data.length} size={18} color={colors.primary} />
 				)}
 				stickySectionHeadersEnabled
 				SectionSeparatorComponent={() => <ItemSeparator />}

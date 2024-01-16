@@ -1,25 +1,34 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
+import { useEffect } from 'react';
+import { AppState, Appearance } from 'react-native';
+import SlidesScreen from '../components/SlidesScreen';
+import useThemeLocal from '../hooks/useThemeLocal';
+import AlertScreen from '../screens/AlertScreen';
 import Animation01Screen from '../screens/Animation/Animation01Screen';
 import Animation02Screen from '../screens/Animation/Animation02Screen';
-import SwitchScreen from '../screens/SwitchScreen';
-import AlertScreen from '../screens/AlertScreen';
-import TextInputScreen from '../screens/TextInputScreen';
+import ChangeThemeScreen from '../screens/ChangeThemeScreen';
+import HomeScreen from '../screens/HomeScreen';
+import InfiniteScrollScreen from '../screens/InfiniteScrollScreen';
+import ModalScreen from '../screens/ModalScreen';
 import PullToRefresh from '../screens/PullToRefresh';
 import SectionListScreen from '../screens/SectionListScreen';
-import ModalScreen from '../screens/ModalScreen';
-import InfiniteScrollScreen from '../screens/InfiniteScrollScreen';
-import SlidesScreen from '../components/SlidesScreen';
-import ChangeThemeScreen from '../screens/ChangeThemeScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import SwitchScreen from '../screens/SwitchScreen';
+import TextInputScreen from '../screens/TextInputScreen';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-	const { theme } = useSelector((state: RootState) => state.theme);
-	
+	const { theme, setLightTheme, setDarkTheme } = useThemeLocal();
+
+	useEffect(() => {
+		AppState.addEventListener('change', (status) => {
+			if (status === 'active') {
+				Appearance.getColorScheme() === 'light' ? setLightTheme() : setDarkTheme();
+			}
+		});
+	}, []);
+
 	return (
 		<NavigationContainer theme={theme}>
 			<Stack.Navigator

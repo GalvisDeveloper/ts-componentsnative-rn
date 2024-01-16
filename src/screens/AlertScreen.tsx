@@ -3,6 +3,7 @@ import { View, Text, Button, Alert } from 'react-native';
 import { styles } from '../theme/appTheme';
 
 import prompt from 'react-native-prompt-android';
+import HeaderTitle from '../components/HeaderTitle';
 
 interface Props {
 	alertTitle?: string;
@@ -56,7 +57,7 @@ const AlertScreen = ({ alertTitle, alertMessage }: Props) => {
 
 	return (
 		<View style={styles.globalMargin}>
-			<Text>Alert</Text>
+			<HeaderTitle title='Alerts' />
 
 			<Button title='Show Alert' onPress={showAlert} />
 			<Button title='Show Prompt' onPress={showPrompt} />
